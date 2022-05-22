@@ -1,5 +1,5 @@
 {
-  "name": "mock",
+  "name": "apimocker",
   "version": "1.0.0",
   "main": "build/src/server.js",
   "author": "Mir Abid Hussain <a@mirabidhussain.com>",
