@@ -1,4 +1,4 @@
-export const definition: Array<string> = [
+export const casualDefinition: Array<string> = [
   "random_element",
   "random_value",
   "random_key",

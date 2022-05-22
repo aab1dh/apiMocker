@@ -15,6 +15,7 @@ export const Profile = {
         latlong: {
             lat: 'number',
             long: 'number',
+            email: 'string',
         }
     }],
 }

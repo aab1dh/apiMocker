@@ -1,5 +1,5 @@
 import { User, UserOverrides } from './usersModel'
-import { mockerService } from '../utils/mocker/mockerService'
+import { mockerService } from '../../utils/mocker/mockerService'
 
 export class UsersService {
     public get(): Promise<any> {

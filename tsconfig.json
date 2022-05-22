@@ -3,7 +3,7 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
 
-        "lib": ["es6"],
+        "lib": ["es2021"],
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
     /* Visit https://aka.ms/tsconfig.json to read more about this file */

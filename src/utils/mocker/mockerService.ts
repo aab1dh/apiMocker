@@ -1,5 +1,5 @@
 const casual = require('casual');
-import { definition } from '../definitions/casualDefinition';
+import { casualDefinition } from '../definitions/casualDefinition';
 
 export class mockerService {
     public static mocker(name: string, model: any, opts?: { repeat?: number, overrides?: any }): Promise<any> {
@@ -27,26 +27,13 @@ export class mockerService {
         const data: any = {}
 
         for (const key in model) {
-            // Object.keys(overrides).forEach(override => {
-            //     if (overrides?.[override]) {
-            //         console.log(Object.keys(overrides?.[override]))
-            //         if (model[key]) model[key].forEach((element: any) => {
-            //             console.log(element)
-            //         });
-            //         // if (Array.isArray(model[key])) {
-            //         //     model[key] = model[key].map((item: any) => {
-            //         //         return item[overrides[key]]
-            //         //     })
-            //         // }
-            //     }
-            // })
 
             if (Array.isArray(model[key]) && overrides) {
                 mockerService.localOverrides(model[key], model, overrides, key)
             }
 
 
-            if (!definition.includes(key)) {
+            if (!casualDefinition.includes(key)) {
                 // global overrrides
                 mockerService.globalOverrides(key, data, model);
             } else {
@@ -57,7 +44,10 @@ export class mockerService {
     }
 
     private static globalOverrides(key: string, data: any, model: any): void {
+
         switch (key) {
+
+
             case 'id':
                 data.id = casual.uuid;
                 break;
@@ -87,7 +77,7 @@ export class mockerService {
 
                     model[key].forEach((element: any) => {
                         Object.keys(element).forEach((keyInner: any, index: number) => {
-                            if (definition.includes(keyInner)) {
+                            if (casualDefinition.includes(keyInner)) {
                                 for (let i = index; i <= index; i++) {
                                     if (model[key][i]) model[key][i][keyInner] = casual[keyInner]
                                 }
@@ -103,8 +93,8 @@ export class mockerService {
         if (Array.isArray(model[key])) {
             model[key].forEach((element: any) => {
                 Object.keys(element).forEach((keyInner: any, index: number) => {
-                    if (definition.includes(keyInner)) {
-                        mockerService.localOverrides(model[key], model, definition, key)
+                    if (casualDefinition.includes(keyInner)) {
+                        mockerService.localOverrides(model[key], model, casualDefinition, key)
 
                     }
                 })
@@ -123,12 +113,12 @@ export class mockerService {
                     // console.log(element[innerKey])
                     mockerService.localOverrides(element[innerKey])
                 } else if (isNaN(Number(innerKey))) {
-                    if (definition.includes(innerKey)) {
+                    if (casualDefinition.includes(innerKey)) {
                         element[innerKey] = casual[innerKey]
 
                     } else {
                         Object.keys(element[innerKey]).forEach((keyInner: any) => {
-                            if (definition.includes(keyInner)) {
+                            if (casualDefinition.includes(keyInner)) {
                                 element[innerKey][keyInner] = casual[keyInner]
                             }
                         })
