@@ -1,9 +1,9 @@
 import { User, UserOverrides } from './usersModel'
-import { fakerService } from '../utils/faker/fakerService'
+import { mockerService } from '../utils/mocker/mockerService'
 
 export class UsersService {
     public get(): Promise<any> {
-        return fakerService.faker('profile', User, { repeat: 10, overrides: UserOverrides })
+        return mockerService.mocker('profile', User, { repeat: 10, overrides: UserOverrides })
     }
 
 }

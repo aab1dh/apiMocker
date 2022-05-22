@@ -1,8 +1,8 @@
 import { Profile, ProfileOverrides } from './profileModel'
-import { fakerService } from '../utils/faker/fakerService'
+import { mockerService } from '../utils/mocker/mockerService'
 export class ProfileService {
     public get(): Promise<any> {
-        return fakerService.faker('profile', Profile, { overrides: ProfileOverrides });
+        return mockerService.mocker('profile', Profile, { overrides: ProfileOverrides });
     }
 
 

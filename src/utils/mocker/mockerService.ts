@@ -1,12 +1,12 @@
 const casual = require('casual');
 import { definition } from '../definitions/casualDefinition';
 
-export class fakerService {
-    public static faker(name: string, model: any, opts?: { repeat?: number, overrides?: any }): Promise<any> {
+export class mockerService {
+    public static mocker(name: string, model: any, opts?: { repeat?: number, overrides?: any }): Promise<any> {
         let repeat = 0
         if (opts?.repeat) repeat = opts?.repeat;
         casual.define(name, function () {
-            return fakerService.casualMapper(model, opts?.overrides)
+            return mockerService.casualMapper(model, opts?.overrides)
         })
 
         let data: any;
@@ -42,13 +42,13 @@ export class fakerService {
             // })
 
             if (Array.isArray(model[key]) && overrides) {
-                fakerService.localOverrides(model[key], model, overrides, key)
+                mockerService.localOverrides(model[key], model, overrides, key)
             }
 
 
             if (!definition.includes(key)) {
                 // global overrrides
-                fakerService.globalOverrides(key, data, model);
+                mockerService.globalOverrides(key, data, model);
             } else {
                 data[key] = casual[key]
             }
@@ -104,7 +104,7 @@ export class fakerService {
             model[key].forEach((element: any) => {
                 Object.keys(element).forEach((keyInner: any, index: number) => {
                     if (definition.includes(keyInner)) {
-                        fakerService.localOverrides(model[key], model, definition, key)
+                        mockerService.localOverrides(model[key], model, definition, key)
 
                     }
                 })
@@ -121,7 +121,7 @@ export class fakerService {
             Object.keys(element).forEach((innerKey: any) => {
                 if (Array.isArray(element[innerKey]) && isNaN(Number(innerKey))) {
                     // console.log(element[innerKey])
-                    fakerService.localOverrides(element[innerKey])
+                    mockerService.localOverrides(element[innerKey])
                 } else if (isNaN(Number(innerKey))) {
                     if (definition.includes(innerKey)) {
                         element[innerKey] = casual[innerKey]
